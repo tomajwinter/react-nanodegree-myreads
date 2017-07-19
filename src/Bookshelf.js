@@ -15,8 +15,8 @@ class Bookshelf extends Component {
           <li key={ index } >
             <Book
               title={ book.title }
-              author={ book.author }
-              cover={ book.cover }
+              authors={ book.authors }
+              cover={ book.imageLinks.thumbnail }
             />
           </li>
         )

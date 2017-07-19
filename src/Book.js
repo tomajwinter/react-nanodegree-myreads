@@ -5,12 +5,12 @@ import Changer from './Changer';
 class Book extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    authors: PropTypes.array.isRequired,
     cover: PropTypes.string.isRequired
   }
 
   render() {
-    const { title, author, cover } = this.props;
+    const { title, authors, cover } = this.props;
 
     return(
       <div className="book">
@@ -19,7 +19,7 @@ class Book extends Component {
           < Changer />
         </div>
         <div className="book-title">{ title }</div>
-        <div className="book-authors">{ author }</div>
+        <div className="book-authors">{ authors }</div>
       </div>
     )
   }
