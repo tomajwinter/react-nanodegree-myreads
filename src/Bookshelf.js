@@ -10,9 +10,9 @@ class Bookshelf extends Component {
 
   bookCollection = () => {
     return(
-      this.props.books.map((book, index) => {
+      this.props.books.map((book) => {
         return (
-          <li key={ index } >
+          <li key={ book.id } >
             <Book
               title={ book.title }
               authors={ book.authors }

@@ -4,9 +4,9 @@ import Changer from './Changer';
 
 class Book extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    authors: PropTypes.array.isRequired,
-    cover: PropTypes.string.isRequired
+    title: PropTypes.string,
+    authors: PropTypes.array,
+    cover: PropTypes.string
   }
 
   render() {

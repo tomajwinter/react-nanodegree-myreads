@@ -20,7 +20,6 @@ class BooksApp extends React.Component {
     return this.state.books.filter((book) => book.shelf === 'currentlyReading');
   }
 
-
   read = () => {
     return this.state.books.filter((book) => book.shelf === 'read');
   }
