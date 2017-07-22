@@ -16,6 +16,12 @@ class BooksApp extends React.Component {
     })
   }
 
+  onChangingShelf = () => {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books: books })
+    })
+  }
+
   currentlyReading = () => {
     return this.state.books.filter((book) => book.shelf === 'currentlyReading');
   }
@@ -32,6 +38,28 @@ class BooksApp extends React.Component {
     return ['read', 'currentlyReading', 'wantToRead'];
   }
 
+  bookshelves = () => {
+    return(
+      <div>
+        <Bookshelf
+          title='Currently Reading'
+          books={ this.currentlyReading() }
+          onChangingShelf={ this.onChangingShelf }
+        />
+        <Bookshelf
+          title='Want to Read'
+          books={ this.wantToRead() }
+          onChangingShelf={ this.onChangingShelf }
+        />
+        <Bookshelf
+          title='Read'
+          books={ this.read() }
+          onChangingShelf={ this.onChangingShelf }
+        />
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className="app">
@@ -44,20 +72,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              <div>
-                <Bookshelf
-                  title='Currently Reading'
-                  books={ this.currentlyReading() }
-                />
-                <Bookshelf
-                  title='Want to Read'
-                  books={ this.wantToRead() }
-                />
-                <Bookshelf
-                  title='Read'
-                  books={ this.read() }
-                />
-              </div>
+              { this.bookshelves() }
             </div>
             <div className="open-search">
               <Link to='/search'>Add a Book</Link>

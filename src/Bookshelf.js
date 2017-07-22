@@ -14,9 +14,8 @@ class Bookshelf extends Component {
         return (
           <li key={ book.id } >
             <Book
-              title={ book.title }
-              authors={ book.authors }
-              cover={ book.imageLinks.thumbnail }
+              data={ book }
+              onChangingShelf={ this.props.onChangingShelf }
             />
           </li>
         )

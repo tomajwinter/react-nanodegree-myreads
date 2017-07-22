@@ -4,19 +4,21 @@ import Changer from './Changer';
 
 class Book extends Component {
   static propTypes = {
-    title: PropTypes.string,
-    authors: PropTypes.array,
-    cover: PropTypes.string
+    data: PropTypes.object
   }
 
   render() {
-    const { title, authors, cover } = this.props;
+    const { id, title, authors, imageLinks, shelf } = this.props.data;
 
     return(
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${cover})` }}></div>
-          < Changer />
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageLinks.thumbnail})` }}></div>
+          <Changer
+            id={ id }
+            shelf={ shelf }
+            onChangingShelf={ this.props.onChangingShelf }
+          />
         </div>
         <div className="book-title">{ title }</div>
         <div className="book-authors">{ authors }</div>
