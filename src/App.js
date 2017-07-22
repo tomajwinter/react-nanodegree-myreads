@@ -1,87 +1,91 @@
-import React from 'react'
-import { Route, Link } from 'react-router-dom'
+import React from 'react';
+import { Route, Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
 import Search from './Search';
-import * as BooksAPI from './BooksAPI'
-import './App.css'
+import * as BooksAPI from './BooksAPI';
+import './App.css';
 
 class BooksApp extends React.Component {
   state = {
     books: []
-  }
+  };
 
   componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books: books })
-    })
+    BooksAPI.getAll().then(books => {
+      this.setState({ books: books });
+    });
   }
 
   onChangingShelf = () => {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books: books })
-    })
-  }
+    BooksAPI.getAll().then(books => {
+      this.setState({ books: books });
+    });
+  };
 
   currentlyReading = () => {
-    return this.state.books.filter((book) => book.shelf === 'currentlyReading');
-  }
+    return this.state.books.filter(book => book.shelf === 'currentlyReading');
+  };
 
   read = () => {
-    return this.state.books.filter((book) => book.shelf === 'read');
-  }
+    return this.state.books.filter(book => book.shelf === 'read');
+  };
 
   wantToRead = () => {
-    return this.state.books.filter((book) => book.shelf === 'wantToRead');
-  }
+    return this.state.books.filter(book => book.shelf === 'wantToRead');
+  };
 
   shelves = () => {
     return ['read', 'currentlyReading', 'wantToRead'];
-  }
+  };
 
   bookshelves = () => {
-    return(
+    return (
       <div>
         <Bookshelf
-          title='Currently Reading'
-          books={ this.currentlyReading() }
-          onChangingShelf={ this.onChangingShelf }
+          title="Currently Reading"
+          books={this.currentlyReading()}
+          onChangingShelf={this.onChangingShelf}
         />
         <Bookshelf
-          title='Want to Read'
-          books={ this.wantToRead() }
-          onChangingShelf={ this.onChangingShelf }
+          title="Want to Read"
+          books={this.wantToRead()}
+          onChangingShelf={this.onChangingShelf}
         />
         <Bookshelf
-          title='Read'
-          books={ this.read() }
-          onChangingShelf={ this.onChangingShelf }
+          title="Read"
+          books={this.read()}
+          onChangingShelf={this.onChangingShelf}
         />
       </div>
-    )
-  }
+    );
+  };
 
   render() {
     return (
       <div className="app">
-        <Route path='/search' render={ () => (
-          < Search />
-        )}/>
-        <Route exact path='/' render={ () => (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              { this.bookshelves() }
-            </div>
-            <div className="open-search">
-              <Link to='/search'>Add a Book</Link>
-            </div>
-          </div>
-        )}/>
+        <Route
+          path="/search"
+          render={() => <Search onChangingShelf={this.onChangingShelf} />}
+        />
+        <Route
+          exact
+          path="/"
+          render={() =>
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>MyReads</h1>
+              </div>
+              <div className="list-books-content">
+                {this.bookshelves()}
+              </div>
+              <div className="open-search">
+                <Link to="/search">Add a Book</Link>
+              </div>
+            </div>}
+        />
       </div>
-    )
+    );
   }
 }
 
-export default BooksApp
+export default BooksApp;
