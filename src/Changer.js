@@ -3,10 +3,10 @@ import * as BooksAPI from './BooksAPI';
 
 class Changer extends Component {
   changeShelf = value => {
-    const { id } = this.props;
+    const { book } = this.props;
 
-    BooksAPI.update({ id: id }, value).then(books => {
-      this.props.onChangingShelf();
+    BooksAPI.update({ id: book.id }, value).then(books => {
+      this.props.onChangingShelf(book, value);
     });
   };
 

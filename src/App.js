@@ -6,6 +6,11 @@ import * as BooksAPI from './BooksAPI';
 import './App.css';
 
 class BooksApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onChangingShelf = this.onChangingShelf.bind(this);
+  }
+
   state = {
     books: []
   };
@@ -16,10 +21,12 @@ class BooksApp extends React.Component {
     });
   }
 
-  onChangingShelf = () => {
-    BooksAPI.getAll().then(books => {
-      this.setState({ books: books });
-    });
+  onChangingShelf = (updatedBook, shelf) => {
+    let books = this.state.books;
+    books = books.filter(book => book.id !== updatedBook.id);
+    updatedBook.shelf = shelf;
+    books.push(updatedBook);
+    this.setState({ books: books });
   };
 
   currentlyReading = () => {
@@ -32,10 +39,6 @@ class BooksApp extends React.Component {
 
   wantToRead = () => {
     return this.state.books.filter(book => book.shelf === 'wantToRead');
-  };
-
-  shelves = () => {
-    return ['read', 'currentlyReading', 'wantToRead'];
   };
 
   bookshelves = () => {
@@ -65,7 +68,11 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route
           path="/search"
-          render={() => <Search onChangingShelf={this.onChangingShelf} />}
+          render={() =>
+            <Search
+              shelvedBooks={this.state.books}
+              onChangingShelf={this.onChangingShelf}
+            />}
         />
         <Route
           exact

@@ -8,7 +8,8 @@ class Book extends Component {
   };
 
   render() {
-    const { id, title, authors, imageLinks, shelf } = this.props.data;
+    const { title, authors, shelf } = this.props.data;
+    const backgroundThumbnail = (this.props.data.imageLinks || {}).thumbnail;
 
     return (
       <div className="book">
@@ -18,11 +19,11 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${imageLinks.thumbnail})`
+              backgroundImage: `url(${backgroundThumbnail})`
             }}
           />
           <Changer
-            id={id}
+            book={this.props.data}
             shelf={shelf}
             onChangingShelf={this.props.onChangingShelf}
           />

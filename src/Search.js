@@ -6,18 +6,35 @@ import * as BooksAPI from './BooksAPI';
 class Search extends Component {
   state = {
     query: '',
-    books: []
+    results: []
   };
 
   updateQuery = query => {
     if (query.length > 0) {
-      BooksAPI.search(query, 100).then(books => {
+      BooksAPI.search(query, 50).then(results => {
+        const updatedBooks = this.updateShelves(results);
         this.setState({
-          books: books
+          results: updatedBooks
         });
       });
+    } else {
+      this.setState({ results: [] });
     }
     this.setState({ query: query.trim() });
+  };
+
+  updateShelves = results => {
+    const { shelvedBooks } = this.props;
+    const updatedBooks = results.map(result => {
+      const duplicate = shelvedBooks.find(
+        shelvedBook => shelvedBook.id === result.id
+      );
+      if (duplicate) {
+        result.shelf = duplicate.shelf;
+      }
+      return result;
+    });
+    return updatedBooks;
   };
 
   searchBar = () => {
@@ -43,9 +60,8 @@ class Search extends Component {
   };
 
   searchResults = () => {
-    const { books } = this.state;
-
-    if (books.error === 'empty query') {
+    const { results } = this.state;
+    if (results.length === 0) {
       return (
         <div className="search-books-results">
           <span>Nothing found</span>
@@ -56,8 +72,8 @@ class Search extends Component {
     return (
       <div className="search-books-results">
         <ol className="book-list">
-          {books.length > 0 &&
-            books.map(book =>
+          {results.length > 0 &&
+            results.map(book =>
               <li key={book.id} className="book-list-item">
                 <div className="book-details">
                   <Book
