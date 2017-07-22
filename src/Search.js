@@ -1,8 +1,11 @@
+// External Dependencies
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Book from './Book';
 import PropTypes from 'prop-types';
+
+// Internal Dependencies
 import * as BooksAPI from './utils/BooksAPI';
+import Book from './Book';
 
 class Search extends Component {
   static propTypes = {

@@ -1,10 +1,13 @@
+// External Dependencies
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import Bookshelf from './Bookshelf';
-import Search from './Search';
 import { startCase } from 'lodash';
+
+// Internal Dependencies
 import * as BooksAPI from './utils/BooksAPI';
 import './App.css';
+import Bookshelf from './Bookshelf';
+import Search from './Search';
 
 class BooksApp extends React.Component {
   constructor(props) {

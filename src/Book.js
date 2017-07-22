@@ -1,5 +1,8 @@
+// External Dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
+
+// Internal Dependencies
 import Changer from './Changer';
 
 const coverImage = props => {

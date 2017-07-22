@@ -1,4 +1,7 @@
+// External Dependencies
 import React, { Component } from 'react';
+
+// Internal Dependencies
 import * as BooksAPI from './utils/BooksAPI';
 
 class Changer extends Component {
