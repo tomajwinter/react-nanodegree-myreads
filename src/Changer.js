@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as BooksAPI from './BooksAPI';
+import * as BooksAPI from './utils/BooksAPI';
 
 class Changer extends Component {
   changeShelf = value => {
@@ -11,7 +11,7 @@ class Changer extends Component {
   };
 
   render() {
-    const { shelf } = this.props;
+    const { shelf } = this.props.book;
 
     return (
       <div className="book-shelf-changer">
