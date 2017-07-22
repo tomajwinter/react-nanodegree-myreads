@@ -6,9 +6,9 @@ MyReads is an app that allows users to select and categorize books they have rea
 ## Getting Started
 
 ```shell
-$ git clone https://github.com/tomajwinter/react-myreads-project.git
-$ yarn install
-$ yarn start
+$ git clone https://github.com/tomajwinter/react-nanodegree-myreads.git
+$ npm install
+$ npm start
 ```
 
 ## Important

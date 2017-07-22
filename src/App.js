@@ -34,23 +34,23 @@ class BooksApp extends React.Component {
   };
 
   shelves = () => {
-    return ['currentlyReading', 'read', 'wantToRead']
-  }
+    return ['currentlyReading', 'wantToRead', 'read'];
+  };
 
   bookshelves = () => {
     const { books } = this.state;
 
     return (
       <div>
-        { this.shelves().map((shelf) => {
-          return(
+        {this.shelves().map(shelf => {
+          return (
             <Bookshelf
-              id={ shelf }
-              title={ startCase(shelf) }
+              key={shelf}
+              title={startCase(shelf)}
               books={books.filter(book => book.shelf === shelf)}
               onChangingShelf={this.onChangingShelf}
             />
-          )
+          );
         })}
       </div>
     );
