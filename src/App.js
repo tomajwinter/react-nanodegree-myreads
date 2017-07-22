@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
 import Search from './Search';
+import { startCase } from 'lodash';
 import * as BooksAPI from './utils/BooksAPI';
 import './App.css';
 
@@ -29,36 +30,25 @@ class BooksApp extends React.Component {
     this.setState({ books: books });
   };
 
-  currentlyReading = () => {
-    return this.state.books.filter(book => book.shelf === 'currentlyReading');
-  };
-
-  read = () => {
-    return this.state.books.filter(book => book.shelf === 'read');
-  };
-
-  wantToRead = () => {
-    return this.state.books.filter(book => book.shelf === 'wantToRead');
-  };
+  shelves = () => {
+    return ['currentlyReading', 'read', 'wantToRead']
+  }
 
   bookshelves = () => {
+    const { books } = this.state;
+
     return (
       <div>
-        <Bookshelf
-          title="Currently Reading"
-          books={this.currentlyReading()}
-          onChangingShelf={this.onChangingShelf}
-        />
-        <Bookshelf
-          title="Want to Read"
-          books={this.wantToRead()}
-          onChangingShelf={this.onChangingShelf}
-        />
-        <Bookshelf
-          title="Read"
-          books={this.read()}
-          onChangingShelf={this.onChangingShelf}
-        />
+        { this.shelves().map((shelf) => {
+          return(
+            <Bookshelf
+              id={ shelf }
+              title={ startCase(shelf) }
+              books={books.filter(book => book.shelf === shelf)}
+              onChangingShelf={this.onChangingShelf}
+            />
+          )
+        })}
       </div>
     );
   };
